@@ -19,13 +19,10 @@ import './style.css';
 // ======================================================
 
 // IMPORTANT:
-// Replace these three values with your own values.
+// Replace these values with your own values.
 
 const CLIENT_ID =
     '1091210150082-mj1pptp0eh9jnoik16trsdnj0o7vmq2v.apps.googleusercontent.com';
-
-const API_KEY =
-    'AIzaSyAfh12iPzRNAlU7WBFPXvai7aiRF8td45k';
 
 const SPREADSHEET_ID =
     '1OwOkYFI8hKsak14uRW8aBH-qhNyFpEWpSAZ4GpR50C4';
