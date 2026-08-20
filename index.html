@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Kasatria 3D Visualization
+    </title>
+
+</head>
+
+<body>
+
+    <!-- ============================= -->
+    <!-- LOGIN SCREEN -->
+    <!-- ============================= -->
+
+    <div id="loginScreen">
+
+        <div class="login-box">
+
+            <h1>
+                Kasatria 3D Visualization
+            </h1>
+
+            <p>
+                Sign in with Google to load the data
+            </p>
+
+            <button id="loginButton">
+                Sign in with Google
+            </button>
+
+            <p id="loginStatus"></p>
+
+        </div>
+
+    </div>
+
+    <!-- 3D APPLICATION -->
+    <div id="app"></div>
+
+    <!-- LAYOUT BUTTONS -->
+    <div id="controls">
+
+      <button id="tableButton">
+        TABLE
+      </button>
+
+      <button id="sphereButton">
+        SPHERE
+      </button>
+
+      <button id="helixButton">
+        HELIX
+      </button>
+
+      <button id="gridButton">
+        GRID
+      </button>
+
+    </div>
+
+
+    <!-- ============================= -->
+    <!-- JAVASCRIPT -->
+    <!-- ============================= -->
+
+    <script
+        type="module"
+        src="/src/main.js"
+    ></script>
+
+</body>
+
+</html>

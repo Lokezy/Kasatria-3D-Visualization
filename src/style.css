@@ -1,0 +1,278 @@
+html,
+body {
+
+    width: 100%;
+    height: 100%;
+
+    margin: 0;
+
+    overflow: hidden;
+
+    background: #000;
+
+    font-family: Arial, sans-serif;
+}
+
+
+/* ========================================
+   3D APPLICATION
+======================================== */
+
+#app {
+
+    width: 100%;
+    height: 100%;
+
+}
+
+
+/* ========================================
+   LOGIN SCREEN
+======================================== */
+
+#loginScreen {
+
+    position: fixed;
+
+    inset: 0;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    background: #000;
+
+    color: white;
+
+    z-index: 1000;
+
+}
+
+
+.login-box {
+
+    width: 420px;
+
+    padding: 40px;
+
+    text-align: center;
+
+    border: 1px solid #333;
+
+    border-radius: 12px;
+
+    background: #111;
+
+}
+
+
+.login-box h1 {
+
+    margin-bottom: 15px;
+
+}
+
+
+.login-box p {
+
+    color: #aaa;
+
+}
+
+
+#loginButton {
+
+    margin-top: 20px;
+
+    padding: 12px 25px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    background: white;
+
+    color: #222;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+}
+
+
+#loginButton:hover {
+
+    background: #ddd;
+
+}
+
+
+#loginStatus {
+
+    margin-top: 20px;
+
+    font-size: 14px;
+
+}
+
+
+/* ========================================
+   PERSON CARD
+======================================== */
+
+.person-card {
+
+    width: 140px;
+    height: 220px;
+
+    box-sizing: border-box;
+
+    border: 2px solid #00ffff;
+
+    border-radius: 6px;
+
+    padding: 8px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: flex-start;
+
+    overflow: hidden;
+
+    color: black;
+
+    font-family: Arial, sans-serif;
+
+    text-align: center;
+
+    font-size: 11px;
+
+}
+
+
+/* ========================================
+   PERSON PHOTO
+======================================== */
+
+.person-card img {
+
+    width: 115px;
+
+    height: 105px;
+
+    object-fit: cover;
+
+    border-radius: 5px;
+
+    margin-bottom: 6px;
+
+    flex-shrink: 0;
+
+}
+
+
+/* ========================================
+   PERSON NAME
+======================================== */
+
+.person-card .name {
+
+    width: 100%;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    line-height: 18px;
+
+    margin-bottom: 4px;
+
+    white-space: normal;
+
+    overflow: hidden;
+
+}
+
+
+.person-name {
+
+    font-weight: 700;
+
+}
+
+/* ========================================
+   PERSON DETAILS
+======================================== */
+
+.person-card .details {
+
+    width: 100%;
+
+    font-size: 10px;
+
+    line-height: 14px;
+
+    white-space: normal;
+
+    overflow: hidden;
+
+}
+
+
+/* ========================================
+   3D LAYOUT CONTROLS
+======================================== */
+
+#controls {
+
+    position: fixed;
+
+    bottom: 20px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    display: flex;
+
+    gap: 8px;
+
+    z-index: 500;
+
+}
+
+
+#controls button {
+
+    padding: 8px 18px;
+
+    background: #000;
+
+    color: #00ffff;
+
+    border: 1px solid #00ffff;
+
+    cursor: pointer;
+
+    font-size: 13px;
+
+}
+
+
+#controls button:hover {
+
+    background: #00ffff;
+
+    color: #000;
+
+}
+
