@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -24,23 +24,27 @@
 
     <div id="loginScreen">
 
-        <div class="login-box">
+        <div class="login-ambient" aria-hidden="true">
+            <span class="orb orb-one"></span>
+            <span class="orb orb-two"></span>
+            <span class="wireframe wireframe-left"></span>
+            <span class="wireframe wireframe-right"></span>
+        </div>
 
-            <h1>
-                Kasatria 3D Visualization
-            </h1>
+        <main class="login-box" aria-label="Kasatria sign in">
+            <span class="eyebrow">KASATRIA 3D VISUALIZATION</span>
+            <h1>Welcome back.</h1>
+            <p class="login-copy">Sign in to explore your people and data in a new dimension.</p>
 
-            <p>
-                Sign in with Google to load the data
-            </p>
-
-            <button id="loginButton">
-                Sign in with Google
+            <button id="loginButton" type="button">
+                <span class="google-g" aria-hidden="true">G</span>
+                <span>Sign in with Google</span>
+                <span class="button-arrow" aria-hidden="true">&#8594;</span>
             </button>
 
-            <p id="loginStatus"></p>
-
-        </div>
+            <p id="loginStatus" role="status"></p>
+            <p class="signin-note">Secure sign-in powered by Google</p>
+        </main>
 
     </div>
 
