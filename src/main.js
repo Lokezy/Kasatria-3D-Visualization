@@ -35,24 +35,9 @@ const SPREADSHEET_ID =
 const SHEET_NAME = 'Data Template';
 
 
-// Read-only access is enough because
-// our website only needs to READ the data.
-const SCOPES =
-    'https://www.googleapis.com/auth/spreadsheets.readonly';
-
-
-// Google Sheets API discovery document
-const DISCOVERY_DOC =
-    'https://sheets.googleapis.com/$discovery/rest?version=v4';
-
-
 // ======================================================
 // GOOGLE VARIABLES
 // ======================================================
-
-let tokenClient;
-
-let gapiReady = false;
 
 let gisReady = false;
 
@@ -103,95 +88,36 @@ async function initializeGoogle() {
 
     try {
 
-        // Load Google API JavaScript client
-        await loadScript(
-            'https://apis.google.com/js/api.js'
-        );
-
-        // Wait for gapi client
-        await new Promise((resolve) => {
-
-            gapi.load('client', resolve);
-
-        });
-
-
-        // Initialize Google API client
-        await gapi.client.init({
-
-            apiKey: API_KEY,
-
-            discoveryDocs: [
-                DISCOVERY_DOC
-            ]
-
-        });
-
-        gapiReady = true;
-
-
         // Load Google Identity Services
         await loadScript(
             'https://accounts.google.com/gsi/client'
         );
 
+        google.accounts.id.initialize({
 
-        // Create OAuth token client
-        tokenClient =
-            google.accounts.oauth2.initTokenClient({
+            client_id: CLIENT_ID,
 
-                client_id: CLIENT_ID,
+            callback: handleGoogleLogin
 
-                scope: SCOPES,
+        });
 
-                callback: async (response) => {
-
-                    if (response.error) {
-
-                        console.error(
-                            'Google authorization error:',
-                            response
-                        );
-
-                        setLoginStatus(
-                            'Google authorization failed.'
-                        );
-
-                        return;
-
-                    }
-
-
-                    // Give the access token
-                    // to the Google API client
-                    gapi.client.setToken({
-
-                        access_token:
-                            response.access_token
-
-                    });
-
-
-                    setLoginStatus(
-                        'Google login successful. Loading data...'
-                    );
-
-
-                    // Get spreadsheet data
-                    await loadSpreadsheetData();
-
-                }
-
-            });
-
+        google.accounts.id.renderButton(
+        document.getElementById('googleSignInButton'),
+        {
+        theme: 'outline',
+        size: 'large',
+        width: 300,
+        text: 'signin_with',
+        shape: 'rectangular',
+        logo_alignment: 'center'
+        }
+    );
 
         gisReady = true;
 
-
         console.log(
-            'Google API initialized successfully.'
+            'Google Sign-In initialized successfully.'
         );
-
 
     } catch (error) {
 
@@ -209,34 +135,19 @@ async function initializeGoogle() {
 }
 
 
-// ======================================================
-// LOGIN BUTTON
-// ======================================================
+function handleGoogleLogin(response) {
 
-document
-    .getElementById('loginButton')
-    .addEventListener('click', () => {
+    console.log(
+        'Google login successful.'
+    );
 
+    setLoginStatus(
+        'Google login successful. Loading data...'
+    );
 
-        if (!gapiReady || !gisReady) {
+    loadSpreadsheetData();
 
-            setLoginStatus(
-                'Google services are still loading. Please wait.'
-            );
-
-            return;
-
-        }
-
-
-        // Ask Google for authorization
-        tokenClient.requestAccessToken({
-
-            prompt: 'consent'
-
-        });
-
-    });
+}
 
 
 // ======================================================
@@ -260,21 +171,28 @@ async function loadSpreadsheetData() {
 
     try {
 
+        const url =
+            `https://sheets.googleapis.com/v4/spreadsheets/` +
+            `${SPREADSHEET_ID}/values/` +
+            `${encodeURIComponent(SHEET_NAME + '!A:F')}` +
+            `?key=${API_KEY}`;
+
         const response =
-            await gapi.client.sheets.spreadsheets.values.get({
+            await fetch(url);
 
-                spreadsheetId:
-                    SPREADSHEET_ID,
+        if (!response.ok) {
 
-                range:
-                    `'${SHEET_NAME}'!A:F`
+            throw new Error(
+                `Google Sheets request failed: ${response.status}`
+            );
 
-            });
+        }
 
+        const data =
+            await response.json();
 
         const rows =
-            response.result.values;
-
+            data.values;
 
         if (!rows || rows.length === 0) {
 
@@ -287,42 +205,32 @@ async function loadSpreadsheetData() {
             );
 
             return;
-
         }
-
 
         console.log(
             'Raw Google Sheet data:',
             rows
         );
 
-
-        // Convert spreadsheet rows
-        // into JavaScript objects
         const people =
             convertRowsToPeople(rows);
-
 
         console.log(
             'People loaded:',
             people
         );
 
-
         console.log(
             `Total people: ${people.length}`
         );
-
 
         // Hide login screen
         document
             .getElementById('loginScreen')
             .style.display = 'none';
 
-
         // Create the 3D cards
         createPeopleCards(people);
-
 
     } catch (error) {
 

@@ -843,7 +843,7 @@ body {
 
     box-shadow: 0 28px 80px rgba(0, 0, 0, 0.58), inset 0 1px 0 rgba(255, 255, 255, 0.07);
 
-    text-align: left;
+    text-align: center;
 
     backdrop-filter: blur(18px);
 
@@ -915,6 +915,15 @@ body {
     color: #c5c5c5;
 
     font: 400 15px/1.55 Arial, sans-serif;
+
+}
+
+
+#googleSignInButton {
+
+    display: flex;
+
+    justify-content: center;
 
 }
 
